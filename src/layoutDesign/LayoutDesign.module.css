@@ -1,0 +1,11 @@
+.root{
+    
+}
+
+.header{
+    padding: 0 !important;
+}
+
+.switch:hover{
+    cursor: pointer;
+}
