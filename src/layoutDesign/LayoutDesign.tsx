@@ -55,7 +55,7 @@ componentDidMount() {
   document.head.appendChild(theme);
   setTimeout(() => {
     document.getElementById("loading")?.remove();
-  }, 2000);
+  }, 1000);
 }
 
 componentDidUpdate(){

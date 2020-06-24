@@ -97,8 +97,8 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
     await apiFetch("all_statements", value, 3);
     await apiFetch("all_statements", value, 4);
     await apiFetch("all_statements", value, 5);
-    // await apiFetch("company_current_quote", value, 1);
-    await apiFetch("company_current_quote_alt", value, 1);
+    await apiFetch("company_current_quote", value, 1);
+    // await apiFetch("company_current_quote_alt", value, 1);
     setfetchStatus(2);
   };
 
