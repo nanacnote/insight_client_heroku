@@ -53,6 +53,9 @@ componentDidMount() {
   theme.setAttribute("rel", "stylesheet");
   theme.setAttribute("href", "theme/antd.dark.min.css");
   document.head.appendChild(theme);
+  setTimeout(() => {
+    document.getElementById("loading")?.remove();
+  }, 2000);
 }
 
 componentDidUpdate(){
