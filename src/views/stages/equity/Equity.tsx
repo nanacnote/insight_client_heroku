@@ -52,8 +52,8 @@ type TState = {
   sidebarSelected: string;
 };
 // ---API ROOT ADDRESS---
-const dataApiRootAddress = "https://insight-rest.herokuapp.com/data/";
-// const dataApiRootAddress = "http://localhost:3001/data/";
+// const dataApiRootAddress = "https://insight-rest.herokuapp.com/data/";
+const dataApiRootAddress = "http://localhost:3001/data/";
 
 const sidebarItems:object[][] = [
   [
@@ -258,7 +258,7 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                               )
                             }
                             suffix={
-                              String($D(d2.data?.price_change, d2.percentualchange))?.charAt($D(d2.data?.price_change, d2.percentualchange).length - 1) === "%" ? null : "%"
+                              String($D(d2.data?.price_change, d2.percentualchange))?.charAt($D(d2.data?.price_change, d2.percentualchange)?.length - 1) === "%" ? null : "%"
                             }
                           />
                           <Statistic
