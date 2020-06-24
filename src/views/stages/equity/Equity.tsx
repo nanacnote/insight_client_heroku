@@ -52,7 +52,7 @@ type TState = {
   sidebarSelected: string;
 };
 // ---API ROOT ADDRESS---
-const dataApiRootAddress = "https://insight-express-server.herokuapp.com/data/";
+const dataApiRootAddress = "https://insight-rest.herokuapp.com/data/";
 
 const sidebarItems:object[][] = [
   [
