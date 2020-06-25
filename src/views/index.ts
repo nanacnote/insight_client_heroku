@@ -8,6 +8,8 @@ export { default as selectorReducer } from './features/selector/selectorSlice';
 export { SideBar } from './features/sider/SideBar';
 
 // components
+export { Overview } from './components/overview/Overview';
+
 export { IncomeStatement } from './components/income_statement/IncomeStatement';
 
 export { BalanceSheet } from './components/balance_sheet/BalanceSheet';

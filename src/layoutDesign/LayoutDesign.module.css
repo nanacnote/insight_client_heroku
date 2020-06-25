@@ -6,6 +6,6 @@
     padding: 0 !important;
 }
 
-.switch:hover{
+.disabled:hover{
     cursor: pointer;
 }

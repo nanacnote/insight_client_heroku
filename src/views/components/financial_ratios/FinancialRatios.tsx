@@ -215,7 +215,6 @@ export const FinancialRatios: React.FC<TProps> = ({
         // return getColor(value);
         return value < 0 ? "#a8071a" : "#237804";
       },
-      minBarLength: 5,
       borderColor: "#ffffff",
       borderWidth: 1,
       hoverBorderWidth: 2,
@@ -293,7 +292,7 @@ export const FinancialRatios: React.FC<TProps> = ({
                         alignItems: "center",
                       }}
                     >
-                      <Title level={4} type="secondary">
+                      <Title level={4} type="secondary" style={{marginBottom: "25px"}}>
                         {E[0]}
                       </Title>
                       <br />
@@ -304,7 +303,7 @@ export const FinancialRatios: React.FC<TProps> = ({
                     {!chartState.includes(String(E[2])) ? (
                       <Row gutter={[16, 16]} justify="center">
                         {selectedItems.map((e) => (
-                          <Col xs={24} lg={4} key={e}>
+                          <Col md={4} key={e}>
                             <div>
                               <Title
                                 level={4}
