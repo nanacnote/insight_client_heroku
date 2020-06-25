@@ -113,7 +113,6 @@ export const IncomeStatement: React.FC<TProps> = ({
 
     obj["datasets"] = arg.map((e, i) => ({
       label: e,
-      minBarLength: 5,
       backgroundColor: function (context: any) {
         let index = context.dataIndex;
         let value = context.dataset.data[index];
