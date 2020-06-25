@@ -15,13 +15,13 @@ import {
 const { Option } = Select;
 
 const company_lse_url_dictionary: { [key: string]: string } = {
-  ezj:
+  "EZJ":
     "https://www.londonstockexchange.com/stock/EZJ/easyjet-plc/company-page",
-  "hl.":
+  "HL.":
     "https://www.londonstockexchange.com/stock/HL./hargreaves-lansdown-plc/company-page",
-  brby:
+  "BRBY":
     "https://www.londonstockexchange.com/stock/BRBY/burberry-group-plc/company-page",
-  adm:
+  "ADM":
     "https://www.londonstockexchange.com/stock/ADM/admiral-group-plc/company-page",
 };
 
