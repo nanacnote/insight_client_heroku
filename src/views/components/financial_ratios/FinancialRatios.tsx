@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
+import { useChartjsZoom } from "../../../hooks";
 import {
   Space,
   Card,
@@ -13,7 +14,7 @@ import {
   Switch,
   Statistic,
 } from "antd";
-import { LineChartOutlined, PercentageOutlined } from "@ant-design/icons";
+import { LineChartOutlined, PercentageOutlined, ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import {
   selectorValue_2,
   selectorValue_3,
@@ -22,9 +23,6 @@ import {
   selectorValue_6,
 } from "../../features/selector/selectorSlice";
 import styles from "./FinancialRatios.module.css";
-
-// import Countup, { useCountUp } from "react-countup";
-// {/* <h5>{useCountUp({ end: 9996954 }).countUp}</h5> */}
 
 const { Text, Title } = Typography;
 
@@ -194,14 +192,6 @@ export const FinancialRatios: React.FC<TProps> = ({
   // function to hadle barchart data distribution
   const getBarData = (arg1: Array<string>, arg2: any) => {
     let obj: { [key: string]: [] | {} } = {};
-    // return value < 0 ? "#a8071a" : "#237804";
-    // function getColor(arg:number): string {
-    //     if(arg > 0){
-    //         return `rgba(${35 + Math.abs(arg*10)}, 120, 4, 1)`
-    //     } else{
-    //         return `rgba(168, ${7 + Math.abs(arg*10)}, 26, 1)`
-    //     }
-    // }
 
     obj["labels"] = Object.keys(d1)
       ?.slice(+arg2[1], +arg2[2])
@@ -224,6 +214,9 @@ export const FinancialRatios: React.FC<TProps> = ({
     }));
     return obj;
   };
+
+  // zoom plugin for bar chart
+  const zoom = useChartjsZoom()
 
   useEffect(() => {
     // pull in api data and set state
@@ -324,6 +317,11 @@ export const FinancialRatios: React.FC<TProps> = ({
                                       .toLocaleUpperCase()}
                                     value={e[1]}
                                     precision={2}
+                                    suffix={
+                                    getBenchmark(e[0], e[1]) > 0?
+                                    <span style={{color: "green"}}><ArrowUpOutlined /></span> :
+                                    <span style={{color: "red"}}><ArrowDownOutlined /></span>
+                                    }
                                   />
                                   <Divider />
                                 </div>
@@ -360,6 +358,7 @@ export const FinancialRatios: React.FC<TProps> = ({
                                   xPadding: 12,
                                   yPadding: 12,
                                 },
+                                plugins: { zoom },
                               }}
                             //   redraw
                             />
