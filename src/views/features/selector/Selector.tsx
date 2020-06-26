@@ -80,7 +80,8 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
         },
         (error) => {
           //_________________TAKE OUT BEFORE DEPLOYMENT_______________
-          throw new Error(`${error} | FETCH STACK ERROR @ ${route} FUNCTION` );
+          // throw new Error(`${error} | FETCH STACK ERROR @ ${route} FUNCTION` );
+          alert(error)
         }
       )
     return

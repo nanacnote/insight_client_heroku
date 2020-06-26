@@ -91,12 +91,13 @@ export default class LayoutDesign extends Component<TProps, TState> {
                       </div>
                       <div>
                         <ASwitch
-                          checkedChildren={<Text strong>dark</Text>}
-                          unCheckedChildren={<Text strong>light</Text>}
+                          checkedChildren={<span>&#127772;</span>}
+                          unCheckedChildren={<span>&#127774;</span>}
                           defaultChecked
                           onChange={() =>
                             this.setState({ theme: !this.state.theme })
                           }
+                          style={{backgroundColor: "#595959"}}
                         />
                       </div>
                     </div>
@@ -104,12 +105,13 @@ export default class LayoutDesign extends Component<TProps, TState> {
                 ) : (
                   <Menu.Item className={styles.disabled} disabled>
                     <ASwitch
-                      checkedChildren={<Text strong>dark</Text>}
-                      unCheckedChildren={<Text strong>light</Text>}
+                      checkedChildren={<span>&#127772;</span>}
+                      unCheckedChildren={<span>&#127774;</span>}
                       defaultChecked
                       onChange={() =>
                         this.setState({ theme: !this.state.theme })
                       }
+                      style={{backgroundColor: "#595959"}}
                     />
                   </Menu.Item>
                 )}
@@ -121,10 +123,10 @@ export default class LayoutDesign extends Component<TProps, TState> {
                 <Menu.Item key="equity research">
                   <Link to="/EquityResearch">Equity Research</Link>
                 </Menu.Item>
-                <Menu.Item key="portfolio analysis">
+                <Menu.Item key="portfolio analysis" disabled>
                   <Link to="/PortfolioAnalysis">Portfolio Analysis</Link>
                 </Menu.Item>
-                <Menu.Item key="sentiment analysis">
+                <Menu.Item key="sentiment analysis" disabled>
                   <Link to="/SentimentAnalysis">Sentiment Analysis</Link>
                 </Menu.Item>
               </Menu>
