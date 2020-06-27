@@ -22,9 +22,9 @@ export const SideBar: React.FC<TProps> = ({...props}): JSX.Element => {
         <div className={styles.root}>
             <Affix>
                 <Sider collapsible collapsed={ collapsed } onCollapse={ collapsedHandler } style={{ height: "100vh", overflow: "auto"}}>
-                    <Menu style={{height: "100%", border: "0px"}}>
+                    <Menu selectedKeys={[props.selected as string]} style={{height: "100%", border: "0px"}}>
                     {props.items.map((e, i) => {return(
-                        <Menu mode="inline" selectedKeys={[props.selected as string]} onClick={(arg)=> props.clickHandler(arg)} style={{border: "0px", paddingBottom: `${i === props.items.length - 1? "48px" : "default" }`}}>
+                        <Menu mode="inline" onClick={(arg)=> props.clickHandler(arg)} style={{border: "0px", paddingBottom: `${i === props.items.length - 1? "48px" : "default" }`}}>
                             <Divider style={{marginTop: `${ i === 0? "0" : "default" }`}}/>
                             {e.map(e=>
                                 Object.entries(e).map((e, i)=>

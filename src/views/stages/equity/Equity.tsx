@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useInView } from "../../../hooks";
 import {
   SideBar,
   Selector,
@@ -78,32 +79,29 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
     TState["sidebarSelected"]
   >();
 
-  //---implementation of all useRef hooks---
-  const overviewRef = useRef<HTMLDivElement>(null);
-  const incomeStatementRef = useRef<HTMLDivElement>(null);
-  const balanceSheetRef = useRef<HTMLDivElement>(null);
-  const cashFlowRef = useRef<HTMLDivElement>(null);
-  const financialRatiosRef = useRef<HTMLDivElement>(null);
-
-  //sidebar ref dictionary mapping link name to its element ref (using useRef hook)
-  const sidebarItemsRef: { [key: string]: any } = {
-    Overview: overviewRef,
-    "Income Statement": incomeStatementRef,
-    "Balance Sheet": balanceSheetRef,
-    "Cash Flow": cashFlowRef,
-    "Financial Ratios": financialRatiosRef,
-  };
-
   // control what section is scrolled into view when a menu item is clicked on sidebar
   // it has a dictionary of "menu item value as key" : "and useRef to required section as value"
   const sideBarItemOnClick = (arg: { [key: string]: any }) => {
-    sidebarItemsRef[`${arg?.key}`]?.current?.scrollIntoView({
+    document.getElementById(arg.key?.replace(" ", "_"))?.scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest",
     });
-    setsidebarSelected(undefined);
   };
+  //---implementation of useInView custom hook which returns the id of the current 
+  // component in the viewport 
+  const [idInView] = useInView([
+    "Overview",
+    "Income_Statement",
+    "Balance_Sheet",
+    "Cash_Flow",
+    "Financial_Ratios"
+  ])
+  // pass on the key of the current component in the viewport to the sidebar feature
+  // to highlight it
+  useEffect(() => {
+    setsidebarSelected(String(idInView).replace("_", " "));
+  }, [idInView])
 
   // implementation of useEffect hook
   // fetch company list data from api and dispatch results to redux store onn component mount
@@ -167,7 +165,6 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 <div
                   id="Overview"
                   className={styles.overview_feature}
-                  ref={overviewRef}
                 >
                   <Overview 
                   breakpoint={props.breakpoint}
@@ -178,7 +175,6 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 <div
                   id="Income_Statement"
                   className={styles.income_statement_feature}
-                  ref={incomeStatementRef}
                 >
                   <IncomeStatement />
                 </div>
@@ -187,7 +183,6 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 <div
                   id="Balance_Sheet"
                   className={styles.balance_sheet_feature}
-                  ref={balanceSheetRef}
                 >
                   <BalanceSheet />
                 </div>
@@ -196,7 +191,6 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 <div
                   id="Cash_Flow"
                   className={styles.cash_flow}
-                  ref={cashFlowRef}
                 >
                   <CashFlow />
                 </div>
@@ -205,7 +199,6 @@ export const Equity: React.FC<TProps> = ({ ...props }): JSX.Element => {
                 <div
                   id="Financial_Ratios"
                   className={styles.financial_ratios}
-                  ref={financialRatiosRef}
                 >
                   <FinancialRatios />
                 </div>

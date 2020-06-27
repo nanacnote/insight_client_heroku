@@ -13,8 +13,10 @@ import {
   Select,
   Switch,
   Statistic,
+  Button,
+  Tooltip,
 } from "antd";
-import { LineChartOutlined, PercentageOutlined, ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import { LineChartOutlined, PercentageOutlined, ArrowUpOutlined, ArrowDownOutlined, RedoOutlined } from "@ant-design/icons";
 import {
   selectorValue_2,
   selectorValue_3,
@@ -37,6 +39,7 @@ type TState = {
   d4: { [key: string]: number };
   d5: { [key: string]: number };
   chartState: Array<string | undefined>;
+  redraw: boolean;
 };
 
 // options to pass to selector
@@ -84,6 +87,10 @@ export const FinancialRatios: React.FC<TProps> = ({
     selector_options_list[3],
     selector_options_list[4],
   ]);
+  // redraw state
+  const [redraw, setredraw] = useState<
+    TState["redraw"]
+  >(false);
 
   // function to filter the selector item out of the options
   const filteredOptions = selector_options_list.filter(
@@ -360,8 +367,22 @@ export const FinancialRatios: React.FC<TProps> = ({
                                 },
                                 plugins: { zoom },
                               }}
-                            //   redraw
+                              redraw={redraw}
                             />
+                            <Tooltip title="redraw chart">
+                              <Button
+                              ghost
+                              type="primary" 
+                              shape="circle" 
+                              icon={<RedoOutlined />} 
+                              onClick={()=>{
+                                setredraw(true)
+                                setTimeout(() => {
+                                  setredraw(false)
+                                }, 500);
+                              }}
+                              />
+                            </Tooltip>
                           </Col>
                         </Row>
                       </div>

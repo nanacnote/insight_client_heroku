@@ -1,7 +1,4 @@
 // features
-export { Counter } from './features/counter/Counter';
-export { default as counterReducer } from './features/counter/counterSlice';
-
 export { Selector } from './features/selector/Selector';
 export { default as selectorReducer } from './features/selector/selectorSlice';
 
