@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useChartjsZoom } from "../../../hooks";
 import { Line, HorizontalBar } from "react-chartjs-2";
+import { RedoOutlined } from '@ant-design/icons';
 import {
   Space,
   Card,
@@ -11,6 +13,8 @@ import {
   Col,
   Select,
   Table,
+  Button,
+  Tooltip,
 } from "antd";
 import {
   selectorValue_2,
@@ -33,6 +37,7 @@ type TState = {
   d3: { [key: string]: number };
   d4: { [key: string]: number };
   d5: { [key: string]: number };
+  redraw: boolean;
 };
 
 // options to pass to selector
@@ -76,6 +81,10 @@ export const IncomeStatement: React.FC<TProps> = ({
   const [tableSelectedItems, settableSelectedItems] = useState<
     TState["tableSelectedItems"]
   >([selector_options_list[0]]);
+  // redraw state
+  const [redraw, setredraw] = useState<
+    TState["redraw"]
+  >(false);
 
   // function to filter the selector item out of the options
   const filteredOptions = selector_options_list.filter(
@@ -484,6 +493,9 @@ export const IncomeStatement: React.FC<TProps> = ({
     return t;
   };
 
+  // zoom plugin for bar chart
+  const zoom = useChartjsZoom()
+
   useEffect(() => {
     // pull in api data and set state
     setd1(current_financial_data?.statement.income_statement);
@@ -550,9 +562,24 @@ export const IncomeStatement: React.FC<TProps> = ({
                         xPadding: 12,
                         yPadding: 12,
                       },
+                      plugins: { zoom },
                     }}
-                    // redraw
+                    redraw={redraw}
                   />
+                  <Tooltip title="redraw chart">
+                    <Button
+                    ghost
+                    type="primary" 
+                    shape="circle" 
+                    icon={<RedoOutlined />} 
+                    onClick={()=>{
+                      setredraw(true)
+                      setTimeout(() => {
+                        setredraw(false)
+                      }, 500);
+                    }}
+                    />
+                  </Tooltip>
                 </Card>
 
                 {/* line chart part */}
