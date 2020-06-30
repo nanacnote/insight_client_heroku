@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import styles from "./Selector.module.css";
 import {
   getCompanyData_1,
@@ -37,6 +37,8 @@ type TProps = {
 // declare typescript state types
 type TState = {
   fetchStatus: number;
+  optionsFetchStatus: string;
+  spinState: boolean;
 };
 
 export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
@@ -45,6 +47,8 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
 
   // implementation of all useState hook
   const [fetchStatus, setfetchStatus] = useState<TState["fetchStatus"]>(0);
+  const [optionsFetchStatus, setoptionsFetchStatus] = useState<TState["optionsFetchStatus"]>("loading...");
+  const [spinState, setspinState] = useState<TState["spinState"]>(true)
 
   // fetch function
   const apiFetch = async (route: string, ticker: string, periodIndex: number)=>{
@@ -103,6 +107,19 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
     setfetchStatus(2);
   };
 
+  //implementation of useEffect for option list fetch 
+  //with dependency on if the select feature has been cliked
+  useEffect(() => {
+    // loading spinner for options fetching
+    setTimeout(() => {
+      setoptionsFetchStatus("Hmmm! This is taking longer than usual")
+      setTimeout(() => {
+        setoptionsFetchStatus("Sorry! Something went wrong please refresh")
+        setspinState(false)
+      }, 10000);
+    }, 5000);
+  }, [ ])
+
   // implementation of useEffect hook
   const { fetchCycle } = props;
   useEffect(() => {
@@ -124,14 +141,21 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
         placeholder={props.placeholder}
         onChange={onChange}
         optionLabelProp="label"
-      >
-        {Object.entries(props.options_list).map((e) => {
+      >{Object.entries(props.options_list).length > 0 ?
+        Object.entries(props.options_list).map((e) => {
           return (
             <Option key={e[1]} value={e[0]} label={e[1]?.toUpperCase()}>
               <div className="option-label-item">{e[1].toUpperCase()}</div>
             </Option>
           );
-        })}
+        })
+        :
+        <Option value="loading">
+          <Spin spinning={spinState}>
+            {optionsFetchStatus}
+          </Spin>
+        </Option>
+      }
       </Select>
     </div>
   );

@@ -46,8 +46,10 @@ type TState = {
   sidebarSelected: string;
 };
 // ---API ROOT ADDRESS---
-const dataApiRootAddress = "https://insight-rest.herokuapp.com/data/";
+const dataApiRootAddress = process.env.REACT_APP_DATA_API_PATH!
+// const dataApiRootAddress = "https://insight-rest.herokuapp.com/data/";
 // const dataApiRootAddress = "http://localhost:3001/data/";
+
 
 const sidebarItems: object[][] = [
   [{ Overview: <GlobalOutlined /> }],
