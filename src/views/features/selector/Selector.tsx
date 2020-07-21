@@ -74,7 +74,7 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
       company_current_quote: { url: `${props.api_root_address}${route}?url=${company_lse_url_dictionary[ticker]}`, dispatcher: {1: (arg: {})=> getCompanyData_7(arg)} },
       
       // get quote from lse api instead of scraping
-      company_current_quote_alt: { url: `https://cors-anywhere.herokuapp.com/https://api.londonstockexchange.com/api/gw/lse/instruments/alldata/${ticker.toUpperCase()}`, dispatcher: {1: (arg: {})=> getCompanyData_7(arg)} },
+      // company_current_quote_alt: { url: `https://cors-anywhere.herokuapp.com/https://api.londonstockexchange.com/api/gw/lse/instruments/alldata/${ticker.toUpperCase()}`, dispatcher: {1: (arg: {})=> getCompanyData_7(arg)} },
     }
     await fetch(dict[route].url)
       .then((res) => res.json())
@@ -102,8 +102,9 @@ export const Selector: React.FC<TProps> = ({ ...props }): JSX.Element => {
     await apiFetch("all_statements", value, 3);
     await apiFetch("all_statements", value, 4);
     await apiFetch("all_statements", value, 5);
-    // await apiFetch("company_current_quote", value, 1);
-    await apiFetch("company_current_quote_alt", value, 1);
+    await apiFetch("company_current_quote", value, 1);
+    //use for getting stock data from lse api directly instead of scrapping
+    // await apiFetch("company_current_quote_alt", value, 1);
     setfetchStatus(2);
   };
 
