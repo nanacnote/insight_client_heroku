@@ -97,7 +97,7 @@ export default class LayoutDesign extends Component<TProps, TState> {
                           onChange={() =>
                             this.setState({ theme: !this.state.theme })
                           }
-                          style={{backgroundColor: "#595959"}}
+                          style={{ backgroundColor: "#595959" }}
                         />
                       </div>
                     </div>
@@ -111,7 +111,7 @@ export default class LayoutDesign extends Component<TProps, TState> {
                       onChange={() =>
                         this.setState({ theme: !this.state.theme })
                       }
-                      style={{backgroundColor: "#595959"}}
+                      style={{ backgroundColor: "#595959" }}
                     />
                   </Menu.Item>
                 )}
@@ -165,6 +165,8 @@ export default class LayoutDesign extends Component<TProps, TState> {
             <Footer style={{ textAlign: "center" }}>
               Insight ©{new Date(Date.now()).getFullYear()} | A visual approach
               to financial research
+              <br />
+              adjeibohyen@hotmail.co.uk
             </Footer>
           </Layout>
         </Router>

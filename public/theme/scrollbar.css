@@ -3,5 +3,5 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: lightslategray;
+  background: rgba(119, 136, 153, 0.5);
 }
